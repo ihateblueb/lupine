@@ -11,11 +11,11 @@ import SwiftData
 @Model
 final class LoginState {
 	var loggedIn: Bool
-	
+
 	var domain: String?
 	var token: String?
-    
-    init(timestamp: Date) {
+
+	init(timestamp: Date) {
 		self.loggedIn = false
-    }
+	}
 }

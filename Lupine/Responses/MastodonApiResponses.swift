@@ -14,7 +14,7 @@ class MastodonApiResponses {
 		public let scope: String
 		public let created_at: String
 	}
-	
+
 	public struct v1_verify_credentials {
 		public let name: String
 		public let website: String
