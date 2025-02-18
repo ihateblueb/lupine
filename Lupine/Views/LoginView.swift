@@ -11,19 +11,89 @@ import SwiftData
 import SwiftUI
 
 struct LoginView: View {
-	@AppStorage("client_id") var client_id: String = ""
-	@AppStorage("client_secret") var client_secret: String = ""
-	@AppStorage("code") var code: String = ""
-	@AppStorage("token") var token: String = ""
+	@Environment(\.dismissWindow) var dismissWindow
+	@Environment(\.openWindow) var openWindow
 
-	@State private var domain: String = ""
+	@AppStorage("domain") var domain: String = ""
+	@AppStorage("client_id") var client_id: String?
+	@AppStorage("client_secret") var client_secret: String?
+	@AppStorage("code") var code: String = ""
+	@AppStorage("token") var token: String?
+
+	@AppStorage("account") var account: v1_user? = nil
+
 	@State private var appsData: v1_apps? = nil
+
+	// todo: error ui
+
+	func isLoggedIn() {
+		if token != nil {
+			print("LoginView isLoggedIn: logged in")
+
+			dismissWindow()
+			openWindow(id: "Main")
+		} else {
+			print("LoginView isLoggedIn: not logged in")
+		}
+	}
+
+	func getAccount() {
+		let decoder = JSONDecoder()
+
+		if token == nil || token!.isEmpty {
+			print("LoginView getAccount: token is empty!")
+			return
+		}
+
+		HttpClient().get(
+			url: "https://\(domain)/api/v1/accounts/verify_credentials",
+			authenticate: true
+		).response { response in
+			debugPrint(response)
+
+			if response.data == nil {
+				print("LoginView getAccount: response.data is nil!")
+				return
+			}
+
+			var accountData: v1_user
+
+			do {
+				accountData = try decoder.decode(
+					v1_user.self,
+					from: response.data!
+				)
+			} catch {
+				debugPrint(error)
+				print(
+					"LoginView getAccount: failed to decode response.data to v1_user"
+				)
+				return
+			}
+
+			account = accountData
+
+			isLoggedIn()
+		}
+	}
 
 	func loginGetToken() {
 		let decoder = JSONDecoder()
 
 		if appsData == nil {
 			print("LoginView loginGetToken: appsData is nil!")
+			return
+		}
+
+		if client_id == nil || client_secret == nil {
+			print(
+				"LoginView loginGetToken: client_id and/or client_secretis nil!"
+			)
+			return
+		}
+
+		if code.isEmpty {
+			print("LoginView loginGetToken: code is empty!")
 			return
 		}
 
@@ -43,12 +113,12 @@ struct LoginView: View {
 				self.code = code
 			}
 		}
-		
+
 		HttpClient().post(
 			url: "https://\(domain)/oauth/token",
 			body: CodeBody(
-				id: client_id,
-				secret: client_secret,
+				id: client_id!,
+				secret: client_secret!,
 				code: code
 			)
 		).response { response in
@@ -56,17 +126,24 @@ struct LoginView: View {
 				print("LoginView loginGetToken: response.data is nil!")
 				return
 			}
-			
+
 			var codeData: oauth_token
 			do {
 				codeData = try decoder.decode(
 					oauth_token.self,
 					from: response.data!
 				)
-			} catch { return }
-			
+			} catch {
+				print(
+					"LoginView loginGetToken: failed to decode response.data to oauth_token"
+				)
+				return
+			}
+
 			token = codeData.access_token
 			print("token acquired! \(codeData.access_token)")
+
+			getAccount()
 		}
 	}
 
@@ -116,11 +193,16 @@ struct LoginView: View {
 					v1_apps.self,
 					from: response.data!
 				)
-			} catch { return }
-			
+			} catch {
+				print(
+					"LoginView loginRegisterApp: failed to decode response.data to v1_apps"
+				)
+				return
+			}
+
 			client_id = appsData!.client_id
 			client_secret = appsData!.client_secret
-			
+
 			loginGetCode()
 		}
 	}
@@ -137,6 +219,7 @@ struct LoginView: View {
 		Group {
 			TextField("Instance domain", text: $domain)
 				.padding([.top, .leading, .trailing])
+
 			Button(action: {
 				print("LoginView Go: \(domain)")
 				loginRegisterApp()
@@ -156,6 +239,10 @@ struct LoginView: View {
 			.padding([.leading, .bottom, .trailing])
 		}
 		.frame(width: 350.0, alignment: .bottomTrailing)
+		.onAppear {
+			openWindow(id: "Debug")
+			isLoggedIn()
+		}
 	}
 }
 

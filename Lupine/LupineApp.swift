@@ -13,11 +13,15 @@ struct LupineApp: App {
 	@AppStorage("token") var token: String = ""
 
 	var body: some Scene {
-		WindowGroup {
+		WindowGroup(id: "Login") {
 			LoginView()
 		}
 
-		WindowGroup("Main") {
+		WindowGroup(id: "Debug") {
+			DebugView()/*-**/
+		}
+		
+		WindowGroup(id: "Main") {
 			ContentView()
 		}
 	}

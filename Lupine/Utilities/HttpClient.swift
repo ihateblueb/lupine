@@ -7,8 +7,11 @@
 
 import Alamofire
 import Foundation
+import SwiftUI
 
 class HttpClient {
+	@AppStorage("token") var token: String = ""
+
 	enum StatusCodeMeaning {
 		case Information
 		case Success
@@ -42,20 +45,63 @@ class HttpClient {
 	public func post(
 		url: String, body: Encodable = EmptyPost(),
 		encoder: ParameterEncoder = JSONParameterEncoder.default,
-		contentType: String? = "application/json"
+		contentType: String = "application/json",
+		authenticate: Bool = false
 	) -> DataRequest {
-		print("HttpClient POST \(url) [-->]: \(String(describing: body))")
+		print(
+			"HttpClient POST \(authenticate ? "(Authenticated)" : "(Unauthenticated)") \(url) [-->]: \(String(describing: body))"
+		)
+
+		var headers: HTTPHeaders = HTTPHeaders()
+		headers.add(name: "Content-Type", value: contentType)
+
+		if authenticate {
+			headers.add(name: "Authorization", value: "Bearer \(token)")
+		}
 
 		return AF.request(
-			url, method: .post, parameters: body,
-			encoder: encoder
+			url, method: .post,
+			parameters: body,
+			encoder: encoder,
+			headers: headers
 		).response { [self] response in
 			debugPrint(response)
 
 			let statusCode: Int = response.response?.statusCode ?? 999
 
 			print(
-				"HttpClient POST \(url) [<--]: \(String(describing: defineStatusCode(code: statusCode))):\(statusCode)"
+				"HttpClient POST \(authenticate ? "(Authenticated)" : "(Unauthenticated)") \(url) [<--]: \(String(describing: defineStatusCode(code: statusCode))):\(statusCode)"
+			)
+		}
+
+	}
+
+	public func get(
+		url: String,
+		contentType: String = "application/json",
+		authenticate: Bool = false
+	) -> DataRequest {
+		print(
+			"HttpClient GET \(authenticate ? "(Authenticated)" : "(Unauthenticated)") \(url) [-->]"
+		)
+
+		var headers: HTTPHeaders = HTTPHeaders()
+		headers.add(name: "Content-Type", value: contentType)
+
+		if authenticate {
+			headers.add(name: "Authorization", value: "Bearer \(token)")
+		}
+
+		return AF.request(
+			url, method: .get,
+			headers: headers
+		).response { [self] response in
+			debugPrint(response)
+
+			let statusCode: Int = response.response?.statusCode ?? 999
+
+			print(
+				"HttpClient GET \(authenticate ? "(Authenticated)" : "(Unauthenticated)") \(url) [<--]: \(String(describing: defineStatusCode(code: statusCode))):\(statusCode)"
 			)
 		}
 

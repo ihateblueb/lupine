@@ -8,8 +8,8 @@
 import Foundation
 
 public struct oauth_token: Codable {
-	public let access_token: String
-	public let token_type: String
-	public let scope: String
-	public let created_at: String
+	public var access_token: String
+	public var token_type: String
+	public var scope: String
+	public var created_at: Int
 }

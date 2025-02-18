@@ -9,12 +9,8 @@ import SwiftData
 import SwiftUI
 
 struct ContentView: View {
-	@Environment(\.openWindow) private var openWindow
-
-	@AppStorage("client_id") var client_id: String = ""
-	@AppStorage("client_secret") var client_secret: String = ""
-	@AppStorage("code") var code: String = ""
 	@AppStorage("token") var token: String = ""
+	@AppStorage("account") var account: v1_user? = nil
 
 	enum SidebarSelection: Hashable {
 		case timeline
@@ -71,26 +67,35 @@ struct ContentView: View {
 				}
 			}
 			.navigationSplitViewColumnWidth(min: 160, ideal: 200)
-			Group {
-				Text("Account")
+			HStack {
+				AvatarView(
+					url: account!.avatar,
+					alt: account!.avatar_description
+				).frame(alignment: .leading)
+
+				VStack(alignment: .leading) {
+					Text((account!.display_name ?? account!.display_name) ?? "")
+					Text("@\(account!.fqn)")
+						.font(.caption)
+				}.frame(maxWidth: .infinity, alignment: .leading)
 			}
 			.padding(.all)
 		} detail: {
 			switch selection {
-				case [.timeline]:
-					TimelineView()
-				case [.settings]:
-					SettingsView()
-					
-				default:
-					Text("Unknown view")
+			case [.timeline]:
+				TimelineView()
+			case [.settings]:
+				SettingsView()
+
+			default:
+				Text("Unknown view")
 			}
 		}
 		.navigationTitle(
 			sidebarSelectionToString(selection: selection)
 		)
 		.toolbar(content: {
-			ToolbarItem() {
+			ToolbarItem {
 				Button(action: {
 					print("new note")
 				}) {
