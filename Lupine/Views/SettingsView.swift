@@ -8,8 +8,20 @@
 import SwiftUI
 
 struct SettingsView: View {
+	@AppStorage("client_id") var client_id: String = ""
+	@AppStorage("client_secret") var client_secret: String = ""
+	@AppStorage("token") var token: String = ""
+
 	var body: some View {
-		Text("Settings")
+		Button(action: {
+			client_id = ""
+			client_secret = ""
+			token = ""
+
+			print("SettingsView: Cleared login state.")
+		}) {
+			Text("Clear login state")
+		}
 	}
 }
 

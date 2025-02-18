@@ -12,7 +12,9 @@ struct ContentView: View {
 	@Environment(\.openWindow) private var openWindow
 	@Environment(\.modelContext) private var modelContext
 
-	@Query var loginState: [LoginState]
+	@AppStorage("client_id") var client_id: String = ""
+	@AppStorage("client_secret") var client_secret: String = ""
+	@AppStorage("token") var token: String = ""
 
 	enum SidebarSelection: Hashable {
 		case timeline
@@ -24,6 +26,25 @@ struct ContentView: View {
 	}
 
 	@State var selection: Set<SidebarSelection> = Set([.timeline])
+
+	func sidebarSelectionToString(selection: Set<SidebarSelection>) -> String {
+		switch selection {
+		case [.timeline]:
+			return "Timeline"
+		case [.notifications]:
+			return "Notifications"
+		case [.followrequests]:
+			return "Follow Requests"
+		case [.search]:
+			return "Search"
+		case [.drive]:
+			return "Drive"
+		case [.settings]:
+			return "Settings"
+		default:
+			return "Unknown"
+		}
+	}
 
 	func login() {
 		print("login hit")
@@ -53,14 +74,18 @@ struct ContentView: View {
 					Label("Settings", systemImage: "gear")
 				}
 			}
-			.navigationSplitViewColumnWidth(min: 150, ideal: 180)
+			.navigationSplitViewColumnWidth(min: 160, ideal: 200)
+			Group {
+				Text("Account")
+			}
+			.padding(.all)
 		} detail: {
 			switch selection {
 			case [.settings]:
 				SettingsView()
 
 			default:
-				if loginState.first?.loggedIn ?? false {
+				if !token.isEmpty {
 					switch selection {
 					case [.timeline]:
 						TimelineView()
@@ -78,6 +103,9 @@ struct ContentView: View {
 				}
 			}
 		}
+		.navigationTitle(
+			sidebarSelectionToString(selection: selection)
+		)
 	}
 }
 
