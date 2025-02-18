@@ -5,6 +5,7 @@
 //  Created by blueb on 2/17/25.
 //
 
+import Alamofire
 import Foundation
 
 class HttpClient {
@@ -36,32 +37,27 @@ class HttpClient {
 		}
 	}
 
+	struct EmptyPost: Encodable {}
+
 	public func post(
-		url: String, body: Any? = nil, contentType: String? = "application/json"
-	) -> Data {
+		url: String, body: Encodable = EmptyPost(),
+		contentType: String? = "application/json"
+	) -> DataRequest {
 		print("HttpClient POST \(url) [-->]: \(String(describing: body))")
 
-		let url = URL(string: url)!
+		return AF.request(
+			url, method: .post, parameters: body,
+			encoder: JSONParameterEncoder.default
+		).response { [self] response in
+			debugPrint(response)
 
-		var request = URLRequest(url: url)
-		request.httpMethod = "POST"
-		request.setValue(
-			contentType,
-			forHTTPHeaderField: "Content-Type"
-		)
-
-		let task = URLSession.shared.dataTask(with: request) {
-			data, response, error in
-			let response = response as! HTTPURLResponse
-			var body = data!
+			let statusCode: Int = response.response?.statusCode ?? 999
 
 			print(
-				"HttpClient POST \(url) [<--]: \(self.defineStatusCode(code: response.statusCode)):\(response.statusCode); \(String(describing: (data != nil) ? String(data: data!, encoding: .utf8) : ""))"
+				"HttpClient POST \(url) [<--]: \(String(describing: defineStatusCode(code: statusCode))):\(statusCode)"
 			)
 		}
 
-		task.resume()
-
-		return Data()
 	}
 }
+

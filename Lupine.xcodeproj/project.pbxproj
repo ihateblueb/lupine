@@ -6,27 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXContainerItemProxy section */
-		228E29082D62B270004B76D1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 228E28EC2D62B26E004B76D1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 228E28F32D62B26E004B76D1;
-			remoteInfo = Lupine;
-		};
-		228E29122D62B270004B76D1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 228E28EC2D62B26E004B76D1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 228E28F32D62B26E004B76D1;
-			remoteInfo = Lupine;
-		};
-/* End PBXContainerItemProxy section */
+/* Begin PBXBuildFile section */
+		228E70672D63F1B300834EFF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 228E70662D63F1B300834EFF /* Alamofire */; };
+/* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		228E28F42D62B26E004B76D1 /* Lupine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lupine.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		228E29072D62B270004B76D1 /* LupineTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LupineTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		228E29112D62B270004B76D1 /* LupineUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LupineUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -42,20 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		228E29042D62B270004B76D1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		228E290E2D62B270004B76D1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				228E70672D63F1B300834EFF /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,8 +46,6 @@
 			isa = PBXGroup;
 			children = (
 				228E28F42D62B26E004B76D1 /* Lupine.app */,
-				228E29072D62B270004B76D1 /* LupineTests.xctest */,
-				228E29112D62B270004B76D1 /* LupineUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -100,50 +70,11 @@
 			);
 			name = Lupine;
 			packageProductDependencies = (
+				228E70662D63F1B300834EFF /* Alamofire */,
 			);
 			productName = Lupine;
 			productReference = 228E28F42D62B26E004B76D1 /* Lupine.app */;
 			productType = "com.apple.product-type.application";
-		};
-		228E29062D62B270004B76D1 /* LupineTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 228E291E2D62B270004B76D1 /* Build configuration list for PBXNativeTarget "LupineTests" */;
-			buildPhases = (
-				228E29032D62B270004B76D1 /* Sources */,
-				228E29042D62B270004B76D1 /* Frameworks */,
-				228E29052D62B270004B76D1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				228E29092D62B270004B76D1 /* PBXTargetDependency */,
-			);
-			name = LupineTests;
-			packageProductDependencies = (
-			);
-			productName = LupineTests;
-			productReference = 228E29072D62B270004B76D1 /* LupineTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		228E29102D62B270004B76D1 /* LupineUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 228E29212D62B270004B76D1 /* Build configuration list for PBXNativeTarget "LupineUITests" */;
-			buildPhases = (
-				228E290D2D62B270004B76D1 /* Sources */,
-				228E290E2D62B270004B76D1 /* Frameworks */,
-				228E290F2D62B270004B76D1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				228E29132D62B270004B76D1 /* PBXTargetDependency */,
-			);
-			name = LupineUITests;
-			packageProductDependencies = (
-			);
-			productName = LupineUITests;
-			productReference = 228E29112D62B270004B76D1 /* LupineUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -158,14 +89,6 @@
 					228E28F32D62B26E004B76D1 = {
 						CreatedOnToolsVersion = 16.2;
 					};
-					228E29062D62B270004B76D1 = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = 228E28F32D62B26E004B76D1;
-					};
-					228E29102D62B270004B76D1 = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = 228E28F32D62B26E004B76D1;
-					};
 				};
 			};
 			buildConfigurationList = 228E28EF2D62B26E004B76D1 /* Build configuration list for PBXProject "Lupine" */;
@@ -177,34 +100,21 @@
 			);
 			mainGroup = 228E28EB2D62B26E004B76D1;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				228E70652D63F1B300834EFF /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 228E28F52D62B26E004B76D1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				228E28F32D62B26E004B76D1 /* Lupine */,
-				228E29062D62B270004B76D1 /* LupineTests */,
-				228E29102D62B270004B76D1 /* LupineUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		228E28F22D62B26E004B76D1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		228E29052D62B270004B76D1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		228E290F2D62B270004B76D1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -221,34 +131,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		228E29032D62B270004B76D1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		228E290D2D62B270004B76D1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		228E29092D62B270004B76D1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 228E28F32D62B26E004B76D1 /* Lupine */;
-			targetProxy = 228E29082D62B270004B76D1 /* PBXContainerItemProxy */;
-		};
-		228E29132D62B270004B76D1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 228E28F32D62B26E004B76D1 /* Lupine */;
-			targetProxy = 228E29122D62B270004B76D1 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		228E29192D62B270004B76D1 /* Debug */ = {
@@ -427,70 +310,6 @@
 			};
 			name = Release;
 		};
-		228E291F2D62B270004B76D1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = me.blueb.LupineTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lupine.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Lupine";
-			};
-			name = Debug;
-		};
-		228E29202D62B270004B76D1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = me.blueb.LupineTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Lupine.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Lupine";
-			};
-			name = Release;
-		};
-		228E29222D62B270004B76D1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = me.blueb.LupineUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = Lupine;
-			};
-			name = Debug;
-		};
-		228E29232D62B270004B76D1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = me.blueb.LupineUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TEST_TARGET_NAME = Lupine;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -512,25 +331,26 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		228E291E2D62B270004B76D1 /* Build configuration list for PBXNativeTarget "LupineTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				228E291F2D62B270004B76D1 /* Debug */,
-				228E29202D62B270004B76D1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		228E29212D62B270004B76D1 /* Build configuration list for PBXNativeTarget "LupineUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				228E29222D62B270004B76D1 /* Debug */,
-				228E29232D62B270004B76D1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		228E70652D63F1B300834EFF /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		228E70662D63F1B300834EFF /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 228E70652D63F1B300834EFF /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 228E28EC2D62B26E004B76D1 /* Project object */;
 }

@@ -13,6 +13,11 @@ final class LoginState {
 	var loggedIn: Bool
 
 	var domain: String?
+
+	var client_id: String?
+	var client_secret: String?
+	var vapid_key: String?
+
 	var token: String?
 
 	init(timestamp: Date) {
