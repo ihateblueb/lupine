@@ -17,7 +17,7 @@ struct LupineApp: App {
 			LoginView()
 		}
 
-		WindowGroup {
+		WindowGroup("Main") {
 			ContentView()
 		}
 	}

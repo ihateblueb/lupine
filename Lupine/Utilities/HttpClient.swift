@@ -41,13 +41,14 @@ class HttpClient {
 
 	public func post(
 		url: String, body: Encodable = EmptyPost(),
+		encoder: ParameterEncoder = JSONParameterEncoder.default,
 		contentType: String? = "application/json"
 	) -> DataRequest {
 		print("HttpClient POST \(url) [-->]: \(String(describing: body))")
 
 		return AF.request(
 			url, method: .post, parameters: body,
-			encoder: JSONParameterEncoder.default
+			encoder: encoder
 		).response { [self] response in
 			debugPrint(response)
 
