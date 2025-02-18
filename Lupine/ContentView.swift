@@ -10,10 +10,10 @@ import SwiftUI
 
 struct ContentView: View {
 	@Environment(\.openWindow) private var openWindow
-	@Environment(\.modelContext) private var modelContext
 
 	@AppStorage("client_id") var client_id: String = ""
 	@AppStorage("client_secret") var client_secret: String = ""
+	@AppStorage("code") var code: String = ""
 	@AppStorage("token") var token: String = ""
 
 	enum SidebarSelection: Hashable {
@@ -44,10 +44,6 @@ struct ContentView: View {
 		default:
 			return "Unknown"
 		}
-	}
-
-	func login() {
-		print("login hit")
 	}
 
 	var body: some View {
@@ -81,35 +77,30 @@ struct ContentView: View {
 			.padding(.all)
 		} detail: {
 			switch selection {
-			case [.settings]:
-				SettingsView()
-
-			default:
-				if !token.isEmpty {
-					switch selection {
-					case [.timeline]:
-						TimelineView()
-
-					default:
-						Text("Unknown view")
-					}
-				} else {
-					Text("Not logged in")
-					Button(action: {
-						openWindow(id: "LoginView")
-					}) {
-						Text("Log in")
-					}
-				}
+				case [.timeline]:
+					TimelineView()
+				case [.settings]:
+					SettingsView()
+					
+				default:
+					Text("Unknown view")
 			}
 		}
 		.navigationTitle(
 			sidebarSelectionToString(selection: selection)
 		)
+		.toolbar(content: {
+			ToolbarItem() {
+				Button(action: {
+					print("new note")
+				}) {
+					Image(systemName: "square.and.pencil")
+				}
+			}
+		})
 	}
 }
 
 #Preview {
 	ContentView()
-		.modelContainer(for: LoginState.self, inMemory: true)
 }

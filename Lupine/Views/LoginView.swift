@@ -11,10 +11,9 @@ import SwiftData
 import SwiftUI
 
 struct LoginView: View {
-	@Environment(\.modelContext) private var modelContext
-
 	@AppStorage("client_id") var client_id: String = ""
 	@AppStorage("client_secret") var client_secret: String = ""
+	@AppStorage("code") var code: String = ""
 	@AppStorage("token") var token: String = ""
 
 	@State private var domain: String = ""
@@ -90,32 +89,42 @@ struct LoginView: View {
 	}
 
 	var body: some View {
-		TextField("Instance domain", text: $domain)
-			.padding([.top, .leading, .trailing])
-		Button(action: {
-			Task {
-				print("LoginView Go: \(domain)")
-				await attemptLogin()
-			}
-		}) {
-			Text("Go")
+		Group {
+			Text("Lupine")
+				.font(.title)
+				.fontWeight(.bold)
+				.padding()
 		}
-		.padding([.leading, .trailing])
-
-		TextField("Code", text: $token)
-			.padding([.top, .leading, .trailing])
-		Button(action: {
-			Task {
-				print("LoginView Finish")
+		.padding([.top, .leading, .trailing])
+		
+		Group {
+			TextField("Instance domain", text: $domain)
+				.padding([.top, .leading, .trailing])
+			Button(action: {
+				Task {
+					print("LoginView Go: \(domain)")
+					await attemptLogin()
+				}
+			}) {
+				Text("Go")
 			}
-		}) {
-			Text("Finish")
+			.padding(.horizontal)
+			
+			TextField("Code", text: $token)
+				.padding(.horizontal)
+			Button(action: {
+				Task {
+					print("LoginView Finish")
+				}
+			}) {
+				Text("Finish")
+			}
+			.padding([.leading, .bottom, .trailing])
 		}
-		.padding([.leading, .trailing])
+		.frame(width: 350.0, alignment: .bottomTrailing)
 	}
 }
 
 #Preview {
 	LoginView()
-		.modelContainer(for: LoginState.self, inMemory: true)
 }
