@@ -21,10 +21,11 @@ public struct v1_status: Codable {
 	public var in_reply_to_id: String?
 	public var in_reply_to_account_id: String?
 	
-	//public var reblog: String?
-	//public var quote: String?
-	//public var quote_id: String?
-	//public var content_type: String?
+	var reblog: Box<v1_status>?
+	var quote: Box<v1_status>?
+	
+	public var quote_id: String?
+	public var content_type: String?
 	
 	public var created_at: String
 	public var edited_at: String?

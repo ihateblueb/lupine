@@ -10,19 +10,31 @@ import SwiftUI
 
 @main
 struct LupineApp: App {
+	@Environment(\.dismissWindow) var dismissWindow
+	@Environment(\.openWindow) var openWindow
+
 	@AppStorage("token") var token: String = ""
 
 	var body: some Scene {
 		WindowGroup(id: "Login") {
 			LoginView()
-		}
+		}.windowStyle(.hiddenTitleBar)  //todo: .defaultSize()
 
 		WindowGroup(id: "Debug") {
-			DebugView()/*-**/
+			DebugView()
 		}
-		
+		WindowGroup(id: "Compose") {
+			ComposeView()
+		}.windowStyle(.hiddenTitleBar).defaultSize(width: 350, height: 400)
+
 		WindowGroup(id: "Main") {
 			ContentView()
+		}.commands {
+			CommandGroup(after: .newItem) {
+				Button("New Post") {
+					openWindow(id: "Compose")
+				}.keyboardShortcut("N", modifiers: [.command, .shift])
+			}
 		}
 	}
 }

@@ -58,7 +58,7 @@ struct TimelineView: View {
 		List {
 			ForEach(timelineData) { element in
 				if element.type == "status" {
-					Status(status: element.status!)
+					StatusView(status: element.status!)
 				}
 			}
 		}.onAppear {

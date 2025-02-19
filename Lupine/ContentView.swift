@@ -9,6 +9,9 @@ import SwiftData
 import SwiftUI
 
 struct ContentView: View {
+	@Environment(\.dismissWindow) var dismissWindow
+	@Environment(\.openWindow) var openWindow
+	
 	@AppStorage("token") var token: String = ""
 	@AppStorage("account") var account: v1_user? = nil
 
@@ -99,7 +102,7 @@ struct ContentView: View {
 		.toolbar(content: {
 			ToolbarItem {
 				Button(action: {
-					print("new note")
+					openWindow(id: "Compose")
 				}) {
 					Image(systemName: "square.and.pencil")
 				}

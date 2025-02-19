@@ -218,6 +218,7 @@ struct LoginView: View {
 
 		Group {
 			TextField("Instance domain", text: $domain)
+				.textFieldStyle(.roundedBorder)
 				.padding([.top, .leading, .trailing])
 
 			Button(action: {
@@ -229,6 +230,7 @@ struct LoginView: View {
 			.padding(.horizontal)
 
 			TextField("Code", text: $code)
+				.textFieldStyle(.roundedBorder)
 				.padding(.horizontal)
 			Button(action: {
 				print("LoginView Finish")
