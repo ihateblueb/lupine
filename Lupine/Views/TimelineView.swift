@@ -24,12 +24,13 @@ struct TimelineView: View {
 			))
 	}
 
-	func getTimeline() {
+	func getTimeline(max_id: String? = nil) {
 		let decoder = JSONDecoder()
 
 		HttpClient()
 			.get(
-				url: "https://\(domain)/api/v1/timelines/\(timeline)",
+				url:
+					"https://\(domain)/api/v1/timelines/\(timeline)\(max_id != nil ? "?max_id=" + max_id! : "")",
 				authenticate: true
 			).response { response in
 				if response.data == nil {
@@ -54,15 +55,31 @@ struct TimelineView: View {
 			}
 	}
 
+	func loadMoreIfNeeded(id: String) {
+		let lastElement = timelineData.last
+		
+		if id == lastElement?.id {
+			print("load more not needed")
+		} else {
+			print("load more needed")
+			if lastElement != nil && lastElement!.type == "status" {
+				getTimeline(max_id: lastElement!.status!.id)
+			}
+		}
+	}
+
 	var body: some View {
-		List {
-			ForEach(timelineData) { element in
-				if element.type == "status" {
-					StatusView(status: element.status!)
+		if (!timelineData.isEmpty) {
+			List(timelineData) { data in
+				if data.type == "status" {
+					StatusView(status: data.status!).task {
+					}
 				}
 			}
-		}.onAppear {
-			getTimeline()
+		} else {
+			ProgressView().onAppear {
+				getTimeline()
+			}
 		}
 	}
 }

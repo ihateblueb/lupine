@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		228E70672D63F1B300834EFF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 228E70662D63F1B300834EFF /* Alamofire */; };
+		22F940E12D6663EE0050F893 /* CachedAsyncImage in Frameworks */ = {isa = PBXBuildFile; productRef = 22F940E02D6663EE0050F893 /* CachedAsyncImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				228E70672D63F1B300834EFF /* Alamofire in Frameworks */,
+				22F940E12D6663EE0050F893 /* CachedAsyncImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +73,7 @@
 			name = Lupine;
 			packageProductDependencies = (
 				228E70662D63F1B300834EFF /* Alamofire */,
+				22F940E02D6663EE0050F893 /* CachedAsyncImage */,
 			);
 			productName = Lupine;
 			productReference = 228E28F42D62B26E004B76D1 /* Lupine.app */;
@@ -102,6 +105,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				228E70652D63F1B300834EFF /* XCRemoteSwiftPackageReference "Alamofire" */,
+				22F940DF2D6663EE0050F893 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 228E28F52D62B26E004B76D1 /* Products */;
@@ -342,6 +346,14 @@
 				minimumVersion = 5.10.2;
 			};
 		};
+		22F940DF2D6663EE0050F893 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/lorenzofiamingo/swiftui-cached-async-image";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -349,6 +361,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 228E70652D63F1B300834EFF /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		22F940E02D6663EE0050F893 /* CachedAsyncImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 22F940DF2D6663EE0050F893 /* XCRemoteSwiftPackageReference "swiftui-cached-async-image" */;
+			productName = CachedAsyncImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

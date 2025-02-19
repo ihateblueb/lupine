@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CachedAsyncImage
 
 struct AvatarView: View {
 	@State var url: String? = ""
@@ -13,7 +14,10 @@ struct AvatarView: View {
 	@State var size: CGFloat? = 35.0
 
 	var body: some View {
-		AsyncImage(url: URL(string: url ?? "")) { image in
+		CachedAsyncImage(
+			url: URL(string: url ?? ""),
+			urlCache: .avatarCache
+		) { image in
 			image.resizable().clipShape(.rect(cornerRadius: 6))
 		} placeholder: {
 			ProgressView()
