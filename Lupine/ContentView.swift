@@ -75,8 +75,10 @@ struct ContentView: View {
 
 				VStack(alignment: .leading) {
 					Text((account!.display_name ?? account!.display_name) ?? "")
+						.lineLimit(1)
 					Text("@\(account!.fqn)")
 						.font(.caption)
+						.lineLimit(1)
 				}.frame(maxWidth: .infinity, alignment: .leading)
 			}
 			.padding(.all)

@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+public struct lupine_timeline_element: Identifiable {
+	public var id: String
+	public var type: String
+	public var status: v1_status?
+}

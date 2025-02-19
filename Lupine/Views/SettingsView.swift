@@ -10,12 +10,14 @@ import SwiftUI
 struct SettingsView: View {
 	@AppStorage("client_id") var client_id: String = ""
 	@AppStorage("client_secret") var client_secret: String = ""
+	@AppStorage("code") var code: String = ""
 	@AppStorage("token") var token: String = ""
 
 	var body: some View {
 		Button(action: {
 			client_id = ""
 			client_secret = ""
+			code = ""
 			token = ""
 
 			print("SettingsView: Cleared login state.")

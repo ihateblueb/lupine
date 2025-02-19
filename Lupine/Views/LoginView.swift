@@ -15,10 +15,10 @@ struct LoginView: View {
 	@Environment(\.openWindow) var openWindow
 
 	@AppStorage("domain") var domain: String = ""
-	@AppStorage("client_id") var client_id: String?
-	@AppStorage("client_secret") var client_secret: String?
+	@AppStorage("client_id") var client_id: String = ""
+	@AppStorage("client_secret") var client_secret: String = ""
 	@AppStorage("code") var code: String = ""
-	@AppStorage("token") var token: String?
+	@AppStorage("token") var token: String = ""
 
 	@AppStorage("account") var account: v1_user? = nil
 
@@ -27,7 +27,7 @@ struct LoginView: View {
 	// todo: error ui
 
 	func isLoggedIn() {
-		if token != nil {
+		if !token.isEmpty {
 			print("LoginView isLoggedIn: logged in")
 
 			dismissWindow()
@@ -40,7 +40,7 @@ struct LoginView: View {
 	func getAccount() {
 		let decoder = JSONDecoder()
 
-		if token == nil || token!.isEmpty {
+		if token.isEmpty {
 			print("LoginView getAccount: token is empty!")
 			return
 		}
@@ -117,8 +117,8 @@ struct LoginView: View {
 		HttpClient().post(
 			url: "https://\(domain)/oauth/token",
 			body: CodeBody(
-				id: client_id!,
-				secret: client_secret!,
+				id: client_id,
+				secret: client_secret,
 				code: code
 			)
 		).response { response in
