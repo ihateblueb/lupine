@@ -91,6 +91,8 @@ struct ContentView: View {
 			switch selection {
 			case [.timeline]:
 				TimelineView()
+			case [.notifications]:
+				NotificationsView()
 			case [.settings]:
 				SettingsView()
 
