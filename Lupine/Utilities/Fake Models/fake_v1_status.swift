@@ -15,6 +15,28 @@ public func fake_v1_status() -> v1_status {
 		url: "http://localhost/@fake_v1_user/statuses/000000001",
 		account: fake_v1_user(),
 		created_at: "2025-01-05T02:17:12.978Z",
-		visibility: "public"
+		visibility: "public",
+		reactions: [
+			v1_status__reaction.init(
+				count: 4,
+				me: false,
+				name: "❤️"),
+			v1_status__reaction.init(
+				count: 9,
+				me: false,
+				name: "🪻"
+			),
+			v1_status__reaction.init(
+				count: 2,
+				me: false,
+				name: "the",
+				url: "https://booping.s3.us-east-005.backblazeb2.com/files/3d8faacc-cba4-4380-b753-c3ee5bc99d17.jpg"
+			),
+			v1_status__reaction.init(
+				count: 2,
+				me: true,
+				name: "😼"
+			),
+		]
 	)
 }

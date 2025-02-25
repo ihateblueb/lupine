@@ -5,8 +5,8 @@
 //  Created by blueb on 2/17/25.
 //
 
-import SwiftUI
 import CachedAsyncImage
+import SwiftUI
 
 struct AvatarView: View {
 	@State var url: String? = ""
@@ -20,7 +20,7 @@ struct AvatarView: View {
 		) { image in
 			image.resizable().clipShape(.rect(cornerRadius: 6))
 		} placeholder: {
-			ProgressView()
+			Rectangle().fill(.quaternary).clipShape(.rect(cornerRadius: 6))
 		}
 		.frame(width: size, height: size)
 

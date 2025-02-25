@@ -18,7 +18,7 @@ struct LupineApp: App {
 	var body: some Scene {
 		WindowGroup(id: "Login") {
 			LoginView()
-		}.windowStyle(.hiddenTitleBar)  //todo: .defaultSize()
+		}.windowStyle(.hiddenTitleBar).defaultSize(width: 350, height: 400)
 
 		WindowGroup(id: "Debug") {
 			DebugView()

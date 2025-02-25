@@ -7,11 +7,12 @@
 
 import SwiftData
 import SwiftUI
+import UserNotifications
 
 struct ContentView: View {
 	@Environment(\.dismissWindow) var dismissWindow
 	@Environment(\.openWindow) var openWindow
-	
+
 	@AppStorage("token") var token: String = ""
 	@AppStorage("account") var account: v1_user? = nil
 
@@ -82,7 +83,8 @@ struct ContentView: View {
 					Text("@\(account!.fqn)")
 						.font(.caption)
 						.lineLimit(1)
-				}.frame(maxWidth: .infinity, alignment: .leading)
+				}
+				.frame(maxWidth: .infinity, alignment: .leading)
 			}
 			.padding(.all)
 		} detail: {

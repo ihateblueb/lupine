@@ -55,24 +55,21 @@ struct TimelineView: View {
 			}
 	}
 
-	func loadMoreIfNeeded(id: String) {
-		let lastElement = timelineData.last
-		
-		if id == lastElement?.id {
-			print("load more not needed")
-		} else {
-			print("load more needed")
-			if lastElement != nil && lastElement!.type == "status" {
-				getTimeline(max_id: lastElement!.status!.id)
-			}
-		}
-	}
-
 	var body: some View {
-		if (!timelineData.isEmpty) {
-			List(timelineData) { data in
-				if data.type == "status" {
-					StatusView(status: data.status!).task {
+		if !timelineData.isEmpty {
+			List {
+				ForEach(timelineData) { data in
+					if data.type == "status" {
+						StatusView(status: data.status!)
+					}
+				}
+
+				Group {
+					ProgressView()
+				}.onAppear {
+					let lastElement = timelineData.last
+					if lastElement != nil && lastElement!.type == "status" {
+						getTimeline(max_id: lastElement!.status!.id)
 					}
 				}
 			}
