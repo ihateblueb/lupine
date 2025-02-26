@@ -19,7 +19,7 @@ struct NotificationView: View {
 					Image(systemName: "star.fill")
 						.foregroundColor(Color.yellow)
 
-					AvatarView(url: notification.account!.avatar, size: 30.0)
+					AvatarView(user: notification.account!, size: 30.0)
 					Text(
 						"\(notification.account!.display_name ?? notification.account!.username) liked your post"
 					)
@@ -37,7 +37,7 @@ struct NotificationView: View {
 							.foregroundColor(Color.accentColor)
 					}
 
-					AvatarView(url: notification.account!.avatar, size: 30.0)
+					AvatarView(user: notification.account!, size: 30.0)
 					Text(
 						"\(notification.account!.display_name ?? notification.account!.username) reacted to your post"
 					)
@@ -47,7 +47,7 @@ struct NotificationView: View {
 					Image(systemName: "arrow.2.squarepath")
 						.foregroundColor(Color.green)
 
-					AvatarView(url: notification.account!.avatar, size: 30.0)
+					AvatarView(user: notification.account!, size: 30.0)
 					Text(
 						"\(notification.account!.display_name ?? notification.account!.username) boosted your post"
 					)

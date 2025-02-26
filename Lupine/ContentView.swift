@@ -73,8 +73,7 @@ struct ContentView: View {
 			.navigationSplitViewColumnWidth(min: 160, ideal: 200)
 			HStack {
 				AvatarView(
-					url: account!.avatar,
-					alt: account!.avatar_description
+					user: account!
 				).frame(alignment: .leading)
 
 				VStack(alignment: .leading) {

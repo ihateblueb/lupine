@@ -31,7 +31,7 @@ struct StatusView: View {
 			if innerStatus != nil {
 				HStack(alignment: .center) {
 					AvatarView(
-						url: innerStatus?.account.avatar,
+						user: innerStatus?.account,
 						size: 40.0
 					)
 					.padding(.trailing, 5.0)

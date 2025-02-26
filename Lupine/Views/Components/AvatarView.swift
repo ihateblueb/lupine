@@ -9,24 +9,42 @@ import CachedAsyncImage
 import SwiftUI
 
 struct AvatarView: View {
-	@State var url: String? = ""
-	@State var alt: String? = ""
+	@Environment(\.dismissWindow) var dismissWindow
+	@Environment(\.openWindow) var openWindow
+
+	@State var user: v1_user?
 	@State var size: CGFloat? = 35.0
 
 	var body: some View {
-		CachedAsyncImage(
-			url: URL(string: url ?? ""),
-			urlCache: .avatarCache
-		) { image in
-			image.resizable().clipShape(.rect(cornerRadius: 6))
-		} placeholder: {
+		if user != nil {
+
+			Button(
+				action: {
+					print("AvatarView Button clicked")
+					openWindow(
+						id: "User",
+						value: lupine_user_window_params(
+							userId: user?.id ?? "")
+					)
+				}) {
+					CachedAsyncImage(
+						url: URL(string: user!.avatar ?? ""),
+						urlCache: .avatarCache
+					) { image in
+						image.resizable().clipShape(.rect(cornerRadius: 6))
+					} placeholder: {
+						Rectangle().fill(.quaternary).clipShape(
+							.rect(cornerRadius: 6))
+					}
+					.frame(width: size, height: size)
+				}.buttonStyle(.borderless)
+
+		} else {
 			Rectangle().fill(.quaternary).clipShape(.rect(cornerRadius: 6))
 		}
-		.frame(width: size, height: size)
-
 	}
 }
 
 #Preview {
-	AvatarView()
+	AvatarView(user: fake_v1_user())
 }

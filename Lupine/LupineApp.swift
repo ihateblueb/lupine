@@ -20,6 +20,8 @@ struct LupineApp: App {
 			LoginView()
 		}.windowStyle(.hiddenTitleBar).defaultSize(width: 350, height: 400)
 
+		// misc
+		
 		WindowGroup(id: "Debug") {
 			DebugView()
 		}
@@ -27,6 +29,14 @@ struct LupineApp: App {
 			ComposeView()
 		}.windowStyle(.hiddenTitleBar).defaultSize(width: 350, height: 400)
 
+		// users
+		
+		WindowGroup(id: "User", for: lupine_user_window_params.self) { params in
+			UserView(userId: params.wrappedValue?.userId ?? "")
+		}.defaultSize(width: 500, height: 600)
+		
+		// main
+		
 		WindowGroup(id: "Main") {
 			ContentView()
 		}.commands {
